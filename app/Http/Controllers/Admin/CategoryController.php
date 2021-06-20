@@ -15,6 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
+
         $categories = Category::paginate(5);
 
         return view('admin.categories.index', compact('categories'));
@@ -90,7 +91,10 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-//        $category = Category::find($id);
+        $category = Category::find($id);
+        if ($category->posts->count()) {
+            return redirect()->route('categories.index')->with('error','Ошибка! У категории есть записи.');
+        }
 //        $category->delete();
         Category::destroy($id);
 
