@@ -42,7 +42,7 @@ class Post extends Model
         return asset("uploads/{$this->thumbnail}");
     }
 
-    public function getPostDate() {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $this->created_at)->format('d F, Y' );
+    public function getPostDate($date = 'd F, Y') {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->created_at)->format($date );
     }
 }
